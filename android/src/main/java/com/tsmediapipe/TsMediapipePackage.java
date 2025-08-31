@@ -18,6 +18,7 @@ public class TsMediapipePackage implements ReactPackage {
   public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactApplicationContext) {
     List<NativeModule> modules = new ArrayList<>();
     modules.add(new MediaPipeNativeModule(reactApplicationContext));
+    modules.add(new StaticImagePoseModule(reactApplicationContext));
     return modules;
   }
 

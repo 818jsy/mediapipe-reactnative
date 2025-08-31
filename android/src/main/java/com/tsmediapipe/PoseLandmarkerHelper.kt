@@ -185,6 +185,25 @@ class PoseLandmarkerHelper(
     // be returned in returnLivestreamResult function
   }
 
+  // Detect pose landmarks from static image
+  fun detectImage(bitmap: Bitmap): PoseLandmarkerResult? {
+    if (runningMode != RunningMode.IMAGE) {
+      throw IllegalArgumentException(
+        "Attempting to call detectImage while not using RunningMode.IMAGE"
+      )
+    }
+
+    // Convert the input Bitmap object to an MPImage object to run inference
+    val mpImage = BitmapImageBuilder(bitmap).build()
+    
+    return try {
+      poseLandmarker?.detect(mpImage)
+    } catch (e: Exception) {
+      Log.e(TAG, "Error detecting pose from image: ${e.message}")
+      null
+    }
+  }
+
   // Return the landmark result to this PoseLandmarkerHelper's caller
   private fun returnLivestreamResult(
     result: PoseLandmarkerResult,

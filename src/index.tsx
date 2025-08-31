@@ -44,7 +44,7 @@ type MediapipeComponentProps = TsMediapipeProps & {
   style?: ViewStyle;
 };
 
-const { MediaPipeNativeModule, TsMediapipeViewManager } = NativeModules;
+const { MediaPipeNativeModule, TsMediapipeViewManager, StaticImagePose } = NativeModules;
 
 const isAndroid = Platform.OS === 'android';
 
@@ -148,4 +148,24 @@ const TsMediapipeView: React.FC<MediapipeComponentProps> = (props) => {
   );
 };
 
-export { TsMediapipeView as RNMediapipe, switchCamera };
+// Static image pose detection functions
+const detectPoseFromImage = async (imageUri: string) => {
+  if (!StaticImagePose) {
+    throw new Error('StaticImagePose module is not available. Make sure the native module is properly linked.');
+  }
+  return StaticImagePose.detectPoseFromImage(imageUri);
+};
+
+const detectPoseFromBase64 = async (base64String: string) => {
+  if (!StaticImagePose) {
+    throw new Error('StaticImagePose module is not available. Make sure the native module is properly linked.');
+  }
+  return StaticImagePose.detectPoseFromBase64(base64String);
+};
+
+export { 
+  TsMediapipeView as RNMediapipe, 
+  switchCamera,
+  detectPoseFromImage,
+  detectPoseFromBase64
+};
