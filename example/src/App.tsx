@@ -11,6 +11,7 @@ import {
   Alert,
   Image,
   ScrollView,
+  NativeModules,
 } from 'react-native';
 import { RNMediapipe, switchCamera, detectPoseFromImage } from '@thinksys/react-native-mediapipe';
 import { launchImageLibrary, ImagePickerResponse } from 'react-native-image-picker';
@@ -22,6 +23,13 @@ export default function App() {
   const [poseResult, setPoseResult] = useState<any>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showCamera, setShowCamera] = useState(true);
+
+  // Debug: Check available native modules
+  React.useEffect(() => {
+    console.log('Available Native Modules:', Object.keys(NativeModules));
+    console.log('StaticImagePose:', !!NativeModules.StaticImagePose);
+    console.log('StaticImagePoseModule:', !!NativeModules.StaticImagePoseModule);
+  }, []);
 
   const onFlip = () => {
     switchCamera();
