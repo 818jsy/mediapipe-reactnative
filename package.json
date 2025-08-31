@@ -1,6 +1,6 @@
 {
   "name": "react-native-mediapipe-818jsy",
-  "version": "0.0.13",
+  "version": "0.0.18",
   "description": "ThinkSys MediaPipe package for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
